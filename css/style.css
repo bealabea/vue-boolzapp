@@ -1,0 +1,31 @@
+.box-container {
+    height: 100vh;
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.main {
+    width: 70%;
+}
+
+.sidebar {
+    height: 100%;
+    width: 30%;
+    min-width: 300px;
+    max-width: 500px;
+    border: 1px solid rgb(179, 179, 179);
+}
+
+.box {
+    border-bottom: 1px solid rgb(179, 179, 179);
+}
+
+.contacts-avatar {
+    height: 60px;
+    border-radius: 50%;
+}
+
+.notifications {
+    background-color: #9fd8f8;
+    height: 60px;
+}
