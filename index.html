@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
@@ -22,32 +28,95 @@
   </head>
   <body>
     <div id="app">
-      <div class="container-fluid">
-        <div class="box-container">
+      <div class="bg-top-color container-fluid"></div>
+      <div class="background container-fluid">
+        <div class="box-container d-flex">
           <div class="sidebar d-flex flex-column">
-            <div class="box p-2">
-              <img
-                class="contacts-avatar"
-                src="img/avatar_io.jpg"
-                alt="Avatar utente"
-              />
-              Nome Utente
-            </div>
-            <div class="notifications"></div>
-            <div v-for="contact in contacts">
-              <div class="p-3">
+            <div class="p-2 d-flex justify-content-between align-items-center">
+              <div>
                 <img
                   class="contacts-avatar"
-                  :src="['img/avatar' + contact.avatar + '.jpg']"
-                  alt=""
-                />{{contact.name}}
+                  src="img/avatar_io.jpg"
+                  alt="Avatar utente"
+                />
+                <p class="fw-bold d-inline">Nome Utente</p>
+              </div>
+              <div class="icons">
+                <i class="px-2 fas fa-circle-notch"></i>
+                <i class="px-2 fas fa-comment-alt"></i>
+                <i class="px-2 fas fa-ellipsis-v"></i>
+              </div>
+            </div>
+
+            <div class="p-3 notify-container d-flex align-items-center">
+              <div class="icon me-3"><i class="fas fa-bell-slash"></i></div>
+              <div class="d-flex flex-column justify-content-center">
+                <p class="text-size">
+                  <strong>Ricevi notifiche di nuovi messaggi</strong>
+                </p>
+                <a class="link" href="#">Attiva notifiche desktop</a>
+              </div>
+            </div>
+
+            <div class="search-container rounded m-2 px-2 py-1">
+              <i class="pe-3 icons fas fa-search"></i>
+              <input
+                class="search input"
+                placeholder="Cerca o inizia una nuova chat"
+                type="text"
+              />
+            </div>
+
+            <div class="avatar-container me-3 border-end">
+              <div v-for="(contact, i) in contacts">
+                <div class="p-3" :class="{'grey-contact' : i % 2 === 0}">
+                  <img
+                    class="contacts-avatar"
+                    :src="['img/avatar' + contact.avatar + '.jpg']"
+                    alt=""
+                  />
+                  <p class="fw-bold d-inline">{{contact.name}}</p>
+                </div>
               </div>
             </div>
           </div>
-          <div class="main d-flex flex-column">
-            <div></div>
-            <div></div>
-            <div></div>
+
+          <div class="main d-flex flex-column justify-content-between">
+            <div
+              class="contact-chat p-2 d-flex justify-content-between align-items-center"
+            >
+              <div class="sticky-top">
+                <img
+                  class="contacts-avatar"
+                  src="img/avatar_1.jpg"
+                  alt="Avatar utente"
+                />
+                <p class="fw-bold d-inline">Michele</p>
+              </div>
+              <div class="icons">
+                <i class="px-2 icons fas fa-search"></i>
+                <i class="px-2 fas fa-paperclip"></i>
+                <i class="px-2 fas fa-ellipsis-v"></i>
+              </div>
+            </div>
+            <div class="chat-bg me-3">
+              <div class="d-flex justify-content-end">
+                <div>
+                  <div class="mx-5 my-3 p-3 sent">Hai portato a spasso il cane?</div>
+                  <div class="mx-5 my-3 p-3 sent">Ricordati di dargli da mangiare</div>
+                </div>
+              </div>
+              <div class="d-flex">
+                <div>
+                    <div class="mx-5 p-3 received">Tutto fatto!</div>
+                </div>
+              </div>
+            </div>
+            <div class="chat-input d-flex justify-content-center align-items-center">
+              <i class="chat-icon far fa-smile"></i>
+              <input class="mx-4 message input rounded" placeholder="Scrivi un messaggio" type="text"/>
+              <i class="chat-icon fas fa-microphone"></i>
+            </div>
           </div>
         </div>
       </div>

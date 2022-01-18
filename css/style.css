@@ -1,31 +1,143 @@
+.body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.bg-top-color {
+  background-color: #419388;
+  height: 150px;
+}
+
+.background {
+  height: calc(100vh - 150px);
+  background-color: #d6d6d6;
+}
+
 .box-container {
-    height: 100vh;
-    width: 1000px;
-    margin: 0 auto;
+  position: relative;
+  top: -100px;
+  height: 100%;
+  min-height: 300px;
+  width: 80%;
+  min-width: 900px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid rgb(179, 179, 179);
+  box-shadow: 0 0 30px 2px rgba(111, 143, 135, 0.5);
 }
 
 .main {
-    width: 70%;
+  width: 65%;
 }
 
 .sidebar {
-    height: 100%;
-    width: 30%;
-    min-width: 300px;
-    max-width: 500px;
-    border: 1px solid rgb(179, 179, 179);
+  height: 100%;
+  width: 35%;
+  min-width: 350px;
+  max-width: 500px;
+  border-right: 1px solid rgb(180, 180, 180);
+  overflow-y: hidden;
 }
 
-.box {
-    border-bottom: 1px solid rgb(179, 179, 179);
+.avatar-container {
+  height: 100%;
+  overflow: auto;
 }
 
 .contacts-avatar {
-    height: 60px;
-    border-radius: 50%;
+  height: 50px;
+  border-radius: 50%;
 }
 
-.notifications {
-    background-color: #9fd8f8;
-    height: 60px;
+.notify-container {
+  background-color: #9fd8f8;
+  height: 70px;
+}
+
+.icons {
+  color: rgb(180, 180, 180);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.fas:hover,
+.far:hover {
+  color: #419388;
+}
+
+.icon {
+  color: #9fd8f8;
+  background-color: #fff;
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.text-size {
+  font-size: 14px;
+  margin: 0;
+}
+
+.link {
+  font-size: 11px;
+  color: rgb(92, 92, 92);
+}
+
+.search-container {
+  border: 1px solid #e9ebec;
+}
+
+.input {
+  border: none;
+  outline: none;
+  padding: 3px;
+}
+
+.input.search {
+  width: calc(100% - 40px);
+  font-size: 13px;
+}
+
+.input.message {
+  width: 80%;
+  padding: 10px;
+  font-size: 13px;
+}
+
+.chat-icon {
+  font-size: 25px;
+  color: rgb(100, 100, 100);
+  cursor: pointer;
+}
+
+.grey-contact {
+  background-color: #e9ebec;
+}
+
+.contact-chat {
+  background-color: #eae9ea;
+}
+
+.chat-bg {
+  height: calc(100% - 120px);
+  background: url(../img/mine.jpg) repeat 50% 50%;
+  font-weight: 500;
+}
+
+.chat-input {
+  height: 65px;
+  background-color: #eae9ea;
+}
+
+.sent {
+  background-color: #dcf8c0;
+  border-radius: 15px;
+}
+
+.received {
+  background-color: #fff;
+  border-radius: 15px;
 }
