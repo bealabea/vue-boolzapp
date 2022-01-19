@@ -126,6 +126,7 @@ new Vue({
         answer: [
                 'Non sono convinto', 'Sei forte', 'Che ne so?', 'Si ma stai calmo!', 'Brindo alla tua!', 'Ma chi sei?', 'Buongiorno'
         ],
+        searchName: '',
     },
     methods: {
         changeChat: function(index) {

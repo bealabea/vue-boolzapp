@@ -32,10 +32,18 @@
   overflow-y: hidden;
 }
 
-.avatar-container {
+.contacts-list-container {
   height: 100%;
   overflow: auto;
+}
+
+.avatar-container {
   cursor: pointer;
+  background-color: #fff;
+}
+
+.avatar-container:hover {
+  background-color: #e9ebec;
 }
 
 .contacts-avatar {
@@ -107,9 +115,11 @@
   cursor: pointer;
 }
 
-.grey-contact {
-  background-color: #e9ebec;
+.selected-chat {
+  background-color: #cacaca;
 }
+
+/* main */
 
 .contact-chat {
   background-color: #eae9ea;
@@ -152,7 +162,7 @@
 }
 
 .date {
-  font-size: 10px;
+  font-size: 11px;
   text-align: right;
   color: rgb(146, 146, 146);
 }

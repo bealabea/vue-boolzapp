@@ -63,13 +63,14 @@
               <input
                 class="search input"
                 placeholder="Cerca o inizia una nuova chat"
+                v-model="searchName"
                 type="text"
               />
             </div>
 
-            <div class="avatar-container me-3 border-end">
-              <div v-for="(contact, i) in contacts">
-                <div class="p-3" :class="{'grey-contact' : i % 2 === 0}" @click="changeChat(i)">
+            <div class="contacts-list-container me-3 border-end">
+              <div v-for="(contact, i) in contacts" class="avatar-container" >
+                <div class="p-3" @click="changeChat(i)" :class="{'selected-chat': currentIndex === i}">
                   <img
                     class="contacts-avatar"
                     :src="['img/avatar' + contact.avatar + '.jpg']"
@@ -84,13 +85,16 @@
           <div class="main d-flex flex-column justify-content-between">
             <div
               class="contact-chat p-2 d-flex justify-content-between align-items-center">
-              <div class="sticky-top">
+              <div class="sticky-top d-flex align-items-center">
                 <img
                   class="contacts-avatar"
                   :src="['img/avatar' + contacts[currentIndex].avatar + '.jpg']"
                   alt="Avatar utente"
                 />
-                <p class="fw-bold d-inline">{{contacts[currentIndex].name}}</p>
+                <div class="">
+                  <div class="fw-bold">{{contacts[currentIndex].name}}</div>
+                  <div class="text-size">Ultimo accesso oggi alle</div>
+                </div>
               </div>
               <div class="icons">
                 <i class="px-2 icons fas fa-search"></i>
