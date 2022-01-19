@@ -119,6 +119,7 @@
   height: calc(100% - 120px);
   background: url(../img/mine.jpg) repeat 50% 50%;
   font-weight: 500;
+  overflow-y: auto;
 }
 
 .chat-input {
@@ -126,12 +127,32 @@
   background-color: #eae9ea;
 }
 
+.chat-mex::after{
+  content: "";
+  clear: both;
+  display: table;
+}
+
 .sent {
   background-color: #dcf8c0;
   border-radius: 15px;
+  min-width: 200px;
+  max-width: 300px;
+  word-break: normal;
+  float: right;
 }
 
 .received {
   background-color: #fff;
   border-radius: 15px;
+  min-width: 200px;
+  max-width: 300px;
+  word-break: normal;
+  float: left;
+}
+
+.date {
+  font-size: 10px;
+  text-align: right;
+  color: rgb(146, 146, 146);
 }

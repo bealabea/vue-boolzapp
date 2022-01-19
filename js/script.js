@@ -2,6 +2,7 @@ new Vue({
     el: '#app',
     data: {
         currentIndex: 0,
+        temporaryItem: '',
         contacts: [
             {
                 name: 'Michele',
@@ -87,11 +88,27 @@ new Vue({
                     }
                 ],
             },
+        ],
+        answer: [
+                'Non sono convinto', 'Sei forte', 'Che ne so?', 'Si ma stai calmo!', 'Brindo alla tua!', 'Ma chi sei?', 'Buongiorno'
         ]
     },
     methods: {
         changeChat: function(index) {
             this.currentIndex = index
-        }
+        },
+        sendMessage: function(index){
+            if (this.temporaryItem !== ''){
+            this.contacts[index].messages.push({ date: '10/01/2020', text: this.temporaryItem, status: 'sent'});
+            }
+            this.temporaryItem = '';
+            this.answerMessage(index);
+        },
+        answerMessage: function(index) {
+            setTimeout(()=>{
+                let rand = Math.floor(Math.random()*this.answer.length);
+                this.contacts[index].messages.push({ date: '10/01/2020', text: this.answer[rand], status: 'received'});
+             },1000);
+        },
     }
 });

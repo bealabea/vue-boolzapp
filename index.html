@@ -99,15 +99,18 @@
               </div>
             </div>
             <div class="chat-bg me-3">
-              <div v-for="(message, i) in contacts[currentIndex].messages" class="d-flex">
+              <div v-for="(message, i) in contacts[currentIndex].messages" class="chat-mex">
                 <div>
-                  <div class="mx-5 my-3 p-3 sent" >{{contacts[currentIndex].messages[i].text}}</div>
+                  <div class="mx-5 my-3 p-3" :class="contacts[currentIndex].messages[i].status === 'sent' ? 'sent' : 'received'">
+                    <div>{{contacts[currentIndex].messages[i].text}}</div>
+                    <div class="date">{{contacts[currentIndex].messages[i].date}}</div>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="chat-input d-flex justify-content-center align-items-center">
               <i class="chat-icon far fa-smile"></i>
-              <input class="mx-4 message input rounded" placeholder="Scrivi un messaggio" type="text"/>
+              <input class="mx-4 message input rounded" placeholder="Scrivi un messaggio" v-model="temporaryItem" @keyup.enter="sendMessage(currentIndex)" type="text"/>
               <i class="chat-icon fas fa-microphone"></i>
             </div>
           </div>
