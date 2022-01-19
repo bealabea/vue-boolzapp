@@ -156,3 +156,11 @@
   text-align: right;
   color: rgb(146, 146, 146);
 }
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}

@@ -99,11 +99,11 @@
               </div>
             </div>
             <div class="chat-bg me-3">
-              <div v-for="(message, i) in contacts[currentIndex].messages" class="chat-mex">
+              <div v-for="message in contacts[currentIndex].messages" class="chat-mex">
                 <div>
-                  <div class="mx-5 my-3 p-3" :class="contacts[currentIndex].messages[i].status === 'sent' ? 'sent' : 'received'">
-                    <div>{{contacts[currentIndex].messages[i].text}}</div>
-                    <div class="date">{{contacts[currentIndex].messages[i].date}}</div>
+                  <div class="mx-5 my-3 p-3" :class="message.status === 'sent' ? 'sent' : 'received'">
+                    <div>{{message.text}}</div>
+                    <div class="date">{{message.date}}</div>
                   </div>
                 </div>
               </div>

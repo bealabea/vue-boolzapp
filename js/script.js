@@ -88,10 +88,44 @@ new Vue({
                     }
                 ],
             },
+            {
+                name: 'Marco',
+                avatar: '_5',
+                visible: true,
+                messages: [
+                    {
+                        date: '10/01/2020 15:30:55',
+                        text: 'Lo sai che ha aperto una nuova pizzeria?',
+                        status: 'sent'
+                    },
+                    {
+                        date: '10/01/2020 15:50:00',
+                        text: 'Si, ma preferirei andare al cinema',
+                        status: 'received'
+                    }
+                ],
+            },
+            {
+                name: 'Martina',
+                avatar: '_6',
+                visible: true,
+                messages: [
+                    {
+                        date: '10/01/2020 15:30:55',
+                        text: 'Lo sai che ha aperto una nuova pizzeria?',
+                        status: 'sent'
+                    },
+                    {
+                        date: '10/01/2020 15:50:00',
+                        text: 'Si, ma preferirei andare al cinema',
+                        status: 'received'
+                    }
+                ],
+            },
         ],
         answer: [
                 'Non sono convinto', 'Sei forte', 'Che ne so?', 'Si ma stai calmo!', 'Brindo alla tua!', 'Ma chi sei?', 'Buongiorno'
-        ]
+        ],
     },
     methods: {
         changeChat: function(index) {
@@ -103,12 +137,19 @@ new Vue({
             }
             this.temporaryItem = '';
             this.answerMessage(index);
+            this.scrollToEnd();
         },
         answerMessage: function(index) {
             setTimeout(()=>{
                 let rand = Math.floor(Math.random()*this.answer.length);
                 this.contacts[index].messages.push({ date: '10/01/2020', text: this.answer[rand], status: 'received'});
              },1000);
+        },
+        scrollToEnd: function() {  
+            setTimeout(()=>{
+            let container = this.$el.querySelector(".chat-bg");
+            container.scrollTo(0, container.scrollHeight)
+        },1500);
         },
     }
 });
