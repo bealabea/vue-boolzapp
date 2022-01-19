@@ -1,6 +1,7 @@
 new Vue({
     el: '#app',
     data: {
+        currentIndex: 0,
         contacts: [
             {
                 name: 'Michele',
@@ -87,5 +88,10 @@ new Vue({
                 ],
             },
         ]
+    },
+    methods: {
+        changeChat: function(index) {
+            this.currentIndex = index
+        }
     }
 });

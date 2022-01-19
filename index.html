@@ -27,10 +27,10 @@
     <title>Document</title>
   </head>
   <body>
-    <div id="app">
-      <div class="bg-top-color container-fluid"></div>
-      <div class="background container-fluid">
+    <div id="app" class="background d-flex align-items-center justify-content-center">
+
         <div class="box-container d-flex">
+          <!-- sidebar -->
           <div class="sidebar d-flex flex-column">
             <div class="p-2 d-flex justify-content-between align-items-center">
               <div>
@@ -69,7 +69,7 @@
 
             <div class="avatar-container me-3 border-end">
               <div v-for="(contact, i) in contacts">
-                <div class="p-3" :class="{'grey-contact' : i % 2 === 0}">
+                <div class="p-3" :class="{'grey-contact' : i % 2 === 0}" @click="changeChat(i)">
                   <img
                     class="contacts-avatar"
                     :src="['img/avatar' + contact.avatar + '.jpg']"
@@ -80,18 +80,17 @@
               </div>
             </div>
           </div>
-
+          <!-- main -->
           <div class="main d-flex flex-column justify-content-between">
             <div
-              class="contact-chat p-2 d-flex justify-content-between align-items-center"
-            >
-              <div class="sticky-top">
+              class="contact-chat p-2 d-flex justify-content-between align-items-center">
+              <div class="sticky-top" v-for="contact in contacts[currentIndex]">
                 <img
                   class="contacts-avatar"
-                  src="img/avatar_1.jpg"
+                  :src="['img/avatar' + contacts[currentIndex].avatar + '.jpg']"
                   alt="Avatar utente"
                 />
-                <p class="fw-bold d-inline">Michele</p>
+                <p class="fw-bold d-inline">{{contacts[currentIndex].name}}</p>
               </div>
               <div class="icons">
                 <i class="px-2 icons fas fa-search"></i>
@@ -100,15 +99,9 @@
               </div>
             </div>
             <div class="chat-bg me-3">
-              <div class="d-flex justify-content-end">
+              <div v-for="(message, i) in contacts[currentIndex].messages" class="d-flex">
                 <div>
-                  <div class="mx-5 my-3 p-3 sent">Hai portato a spasso il cane?</div>
-                  <div class="mx-5 my-3 p-3 sent">Ricordati di dargli da mangiare</div>
-                </div>
-              </div>
-              <div class="d-flex">
-                <div>
-                    <div class="mx-5 p-3 received">Tutto fatto!</div>
+                  <div class="mx-5 my-3 p-3 sent" >{{contacts[currentIndex].messages[i].text}}</div>
                 </div>
               </div>
             </div>
