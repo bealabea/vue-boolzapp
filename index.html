@@ -30,113 +30,120 @@
   <body>
     <div id="app" class="background d-flex align-items-center justify-content-center">
 
-        <div class="box-container d-flex">
-          <!-- sidebar -->
-          <aside class="sidebar d-flex flex-column">
-            <!-- Utente BoolzApp -->
-            <div class="p-2 d-flex justify-content-between align-items-center">
-              <!-- avatar e nome utente -->
-              <div>
-                <img class="contacts-avatar" src="img/avatar_io.jpg" alt="Avatar utente"/>
-                <p class="fw-bold d-inline">Beatrice</p>
-              </div>
-              <!-- icone utente -->
-              <div class="icons">
-                <i class="px-2 fas fa-circle-notch"></i>
-                <i class="px-2 fas fa-comment-alt"></i>
-                <i class="px-2 fas fa-ellipsis-v"></i>
-              </div>
+      <div class="box-container d-flex">
+        <!-- sidebar -->
+        <aside class="sidebar overflow-hidden d-flex flex-column">
+          <!-- Utente BoolzApp -->
+          <section class="p-2 d-flex justify-content-between align-items-center">
+            <!-- avatar e nome utente -->
+            <div>
+              <img class="avatar-image" src="img/avatar_io.jpg" alt="Avatar utente"/>
+              <p class="fw-bold d-inline">Beatrice</p>
             </div>
-            <!-- sezione attiva/disattiva notifiche -->
-            <div class="p-3 notify-container d-flex align-items-center">
-              <!-- funzione che al click cambia il testo e operatore ternario che aggiunge le classi in base al testo -->
-              <div class="notify-icon me-3"
-              :class="notifyText === 'Ricevi notifiche di nuovi messaggi'? 'notify-icon-off' : 'notify-icon-on'"
-              @click="notifyOnOff()"></div>
-              <div class="d-flex flex-column justify-content-center">
-                <p class="text-size"><strong>{{notifyText}}</strong></p>
-                <a class="link" href="#">Attiva notifiche desktop</a>
-              </div>
+            <!-- icone utente -->
+            <div class="icons">
+              <i class="px-2 fas fa-circle-notch"></i>
+              <i class="px-2 fas fa-comment-alt"></i>
+              <i class="px-2 fas fa-ellipsis-v"></i>
             </div>
-            <!-- input per la ricerca dei contatti -->
-            <div class="search-container rounded m-2 px-2 py-1">
-              <i class="pe-3 icons fas fa-search"></i>
-              <input
-                class="search input"
-                placeholder="Cerca o inizia una nuova chat"
-                v-model="searchName"
-                type="text"
-              />
+          </section>
+          <!-- sezione attiva/disattiva notifiche -->
+          <section class="p-3 notify-container d-flex align-items-center">
+            <!-- funzione che al click cambia il testo e operatore ternario che aggiunge le classi in base al testo -->
+            <div class="notify-icon rounded-circle me-3"
+            :class="notifyText === 'Ricevi notifiche di nuovi messaggi'? 'notify-icon-off' : 'notify-icon-on'"
+            @click="notifyOnOff()"></div>
+            <div class="d-flex flex-column justify-content-center">
+              <p class="text-size m-0"><strong>{{notifyText}}</strong></p>
+              <a class="link small-text-size" href="#" @click="notifyOnOff()">{{notifyLink}}</a>
             </div>
-            <!-- lista dei contatti -->
-            <div class="contacts-list-container me-3 border-end">
-              <!-- v-for per la creazione di tutti i contatti -->
-              <div v-for="(contact, i) in contacts" class="avatar-container" >
-                <!-- v-if che visualizza i contatti in base a quello che scrivo sull'input della ricerca -->
-                <!-- funzione che al click visualizza nel main la chat rispettiva al contatto cliccato + aggiunta classe (background) al contatto selezionato -->
-                <div v-if="contact.name.toLowerCase().includes(searchName)" class="p-3" @click="changeChat(i)" :class="{'selected-chat': currentIndex === i}">
-                  <img
-                    class="contacts-avatar"
-                    :src="['img/avatar' + contact.avatar + '.jpg']"
-                    alt=""
-                  />
-                  <p class="fw-bold d-inline">{{contact.name}}</p>
-                </div>
-              </div>
-            </div>
-          </aside>
-          <!-- main -->
-          <main class="main d-flex flex-column justify-content-between">
-            <div class="contact-chat p-2 d-flex justify-content-between align-items-center">
-              <div class="d-flex align-items-center">
-                <!-- con il currentindex con il click sul contatto, oltre alla chat aggiorno il nome e l'avatar del contatto sopra la schermata dei messaggi -->
-                <img
-                  class="contacts-avatar"
-                  :src="['img/avatar' + contacts[currentIndex].avatar + '.jpg']"
-                  alt="Avatar utente"
-                />
-                <div class="">
-                  <div class="fw-bold">{{contacts[currentIndex].name}}</div>
-                  <div class="text-size">Ultimo accesso oggi alle {{contacts[currentIndex].messages[lastAccess(currentIndex)].date}}</div>
-                </div>
-              </div>
-              <div class="icons">
-                <i class="px-2 icons fas fa-search"></i>
-                <i class="px-2 fas fa-paperclip"></i>
-                <i class="px-2 fas fa-ellipsis-v"></i>
-              </div>
-            </div>
-            <div class="chat-bg me-3">
-              <div v-for="(message, i) in contacts[currentIndex].messages" class="chat-mex">
-                <div>
-                  <div class="chat-message mx-5 my-3 p-3" :class="message.status">
-                    <div class="d-flex justify-content-between">
-                      <div>{{message.text}}</div>
-                      <i class="ps-4 icons fas fa-chevron-down" @click="openModal(i)"></i>
-                    </div>
-                    <div class="date">{{message.date}}</div>
-                    <div class="mod" v-if="modale === i">
-                      <div class="select-box py-2 px-4">Message info</div>
-                      <div class="select-box py-2 px-4">Delete message</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="chat-input d-flex justify-content-center align-items-center">
-              <i class="chat-icon far fa-smile"></i>
-              <input
-              class="mx-4 message input rounded"
-              placeholder="Scrivi un messaggio"
-              v-model="temporaryMex"
-              @keyup.enter="sendMessage(currentIndex)"
+          </section>
+          <!-- input per la ricerca dei contatti -->
+          <section class="search-container rounded m-2 px-2 py-1 d-flex">
+            <i class="align-self-center pe-3 icons fas fa-search"></i>
+            <input
+              class="search input text-size"
+              placeholder="Cerca o inizia una nuova chat"
+              v-model="searchName"
               type="text"
-              />
-              <i class="chat-icon fas fa-microphone"></i>
+            />
+          </section>
+          <!-- lista dei contatti -->
+          <section class="contacts-list-container overflow-auto me-3 border-end">
+            <!-- v-for per la creazione di tutti i contatti -->
+            <div v-for="(contact, i) in contacts" class="contact-container" >
+              <!-- v-if che visualizza i contatti in base a quello che scrivo sull'input della ricerca -->
+              <!-- funzione che al click visualizza nel main la chat rispettiva al contatto cliccato + aggiunta classe (background) al contatto selezionato -->
+              <div v-if="contact.name.toLowerCase().includes(searchName)" class="p-3" @click="changeChat(i)" :class="{'selected-contact': currentIndex === i}">
+                <img
+                  class="avatar-image"
+                  :src="['img/avatar' + contact.avatar + '.jpg']"
+                  alt=""
+                />
+                <p class="fw-bold d-inline">{{contact.name}}</p>
+              </div>
             </div>
-          </main>
-        </div>
+          </section>
+        </aside>
+        <!-- main -->
+        <main class="main d-flex flex-column justify-content-between">
+          <section class="chat-control-section p-2 d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+              <!-- con il currentindex al click sul contatto, oltre alla chat aggiorno il nome e l'avatar del contatto sopra la schermata dei messaggi -->
+              <!-- avatar e nome e contatto -->
+              <img
+                class="avatar-image"
+                :src="['img/avatar' + contacts[currentIndex].avatar + '.jpg']"
+                alt="Avatar utente"
+              />
+              <div class="">
+                <div class="fw-bold">{{contacts[currentIndex].name}}</div>
+                <div class="small-text-size">Ultimo accesso oggi alle {{contacts[currentIndex].messages[lastAccess(currentIndex)].date}}</div>
+              </div>
+            </div>
+            <!-- icone contatto -->
+            <div class="icons">
+              <i class="px-2 icons fas fa-search"></i>
+              <i class="px-2 fas fa-paperclip"></i>
+              <i class="px-2 fas fa-ellipsis-v"></i>
+            </div>
+          </section>
+          <!-- chat -->
+          <section class="chat-bg overflow-auto me-3">
+            <!-- per ogni messaggio in messaggi visualizzo il testo e gli attribusco la classe in base allo status contenuto nell'oggetto -->
+            <div v-for="(message, i) in contacts[currentIndex].messages" class="message-container">
+              <div class="chat-message mx-5 my-3 py-2 px-3" :class="message.status">
+                <!-- aggiungo la possibilità di aprire una modale con l'opzione delete message (l'opzione non funziona) -->
+                <div class="d-flex justify-content-between">
+                  <div class="text-break">{{message.text}}</div>
+                  <!-- al click dell'icona apro e chiudo la modale con la funzione openModal -->
+                  <i class="ps-4 icons fas fa-chevron-down" @click="openModal(i)"></i>
+                </div>
+                <div class="small-text-size text-end">{{message.date}}</div>
+                <!-- con v-if visualizzo solo la modale del messaggio cliccato -->
+                <div class="mod-box rounded" v-if="modale === i">
+                  <div class="message-option py-2 px-4">Message info</div>
+                  <div class="message-option py-2 px-4">Delete message</div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- input per scrivere un mesaggio con la funzione sendMessage quando premo invio, dopo 1 secondo ottengo una risposta random -->
+          <section class="chat-control-section d-flex justify-content-center align-items-center">
+            <i class="message-input-icon far fa-smile"></i>
+            <input
+            class="mx-4 message input rounded text-size"
+            placeholder="Scrivi un messaggio"
+            v-model="temporaryMex"
+            @keyup.enter="sendMessage(currentIndex)"
+            type="text"
+            />
+            <i class="message-input-icon fas fa-microphone"></i>
+          </section>
+        </main>
+
       </div>
+
     </div>
     <script src="js/script.js"></script>
   </body>
