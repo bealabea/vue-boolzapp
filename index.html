@@ -23,41 +23,42 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <title>Document</title>
+    <title>BoolzApp</title>
   </head>
   <body>
     <div id="app" class="background d-flex align-items-center justify-content-center">
 
         <div class="box-container d-flex">
           <!-- sidebar -->
-          <div class="sidebar d-flex flex-column">
+          <aside class="sidebar d-flex flex-column">
+            <!-- Utente BoolzApp -->
             <div class="p-2 d-flex justify-content-between align-items-center">
+              <!-- avatar e nome utente -->
               <div>
-                <img
-                  class="contacts-avatar"
-                  src="img/avatar_io.jpg"
-                  alt="Avatar utente"
-                />
-                <p class="fw-bold d-inline">Nome Utente</p>
+                <img class="contacts-avatar" src="img/avatar_io.jpg" alt="Avatar utente"/>
+                <p class="fw-bold d-inline">Beatrice</p>
               </div>
+              <!-- icone utente -->
               <div class="icons">
                 <i class="px-2 fas fa-circle-notch"></i>
                 <i class="px-2 fas fa-comment-alt"></i>
                 <i class="px-2 fas fa-ellipsis-v"></i>
               </div>
             </div>
-
+            <!-- sezione attiva/disattiva notifiche -->
             <div class="p-3 notify-container d-flex align-items-center">
-              <div class="icon me-3"><i class="fas fa-bell-slash"></i></div>
+              <!-- funzione che al click cambia il testo e operatore ternario che aggiunge le classi in base al testo -->
+              <div class="notify-icon me-3"
+              :class="notifyText === 'Ricevi notifiche di nuovi messaggi'? 'notify-icon-off' : 'notify-icon-on'"
+              @click="notifyOnOff()"></div>
               <div class="d-flex flex-column justify-content-center">
-                <p class="text-size">
-                  <strong>Ricevi notifiche di nuovi messaggi</strong>
-                </p>
+                <p class="text-size"><strong>{{notifyText}}</strong></p>
                 <a class="link" href="#">Attiva notifiche desktop</a>
               </div>
             </div>
-
+            <!-- input per la ricerca dei contatti -->
             <div class="search-container rounded m-2 px-2 py-1">
               <i class="pe-3 icons fas fa-search"></i>
               <input
@@ -67,10 +68,13 @@
                 type="text"
               />
             </div>
-
+            <!-- lista dei contatti -->
             <div class="contacts-list-container me-3 border-end">
+              <!-- v-for per la creazione di tutti i contatti -->
               <div v-for="(contact, i) in contacts" class="avatar-container" >
-                <div class="p-3" @click="changeChat(i)" :class="{'selected-chat': currentIndex === i}">
+                <!-- v-if che visualizza i contatti in base a quello che scrivo sull'input della ricerca -->
+                <!-- funzione che al click visualizza nel main la chat rispettiva al contatto cliccato + aggiunta classe (background) al contatto selezionato -->
+                <div v-if="contact.name.toLowerCase().includes(searchName)" class="p-3" @click="changeChat(i)" :class="{'selected-chat': currentIndex === i}">
                   <img
                     class="contacts-avatar"
                     :src="['img/avatar' + contact.avatar + '.jpg']"
@@ -80,12 +84,12 @@
                 </div>
               </div>
             </div>
-          </div>
+          </aside>
           <!-- main -->
-          <div class="main d-flex flex-column justify-content-between">
-            <div
-              class="contact-chat p-2 d-flex justify-content-between align-items-center">
-              <div class="sticky-top d-flex align-items-center">
+          <main class="main d-flex flex-column justify-content-between">
+            <div class="contact-chat p-2 d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center">
+                <!-- con il currentindex con il click sul contatto, oltre alla chat aggiorno il nome e l'avatar del contatto sopra la schermata dei messaggi -->
                 <img
                   class="contacts-avatar"
                   :src="['img/avatar' + contacts[currentIndex].avatar + '.jpg']"
@@ -93,7 +97,7 @@
                 />
                 <div class="">
                   <div class="fw-bold">{{contacts[currentIndex].name}}</div>
-                  <div class="text-size">Ultimo accesso oggi alle</div>
+                  <div class="text-size">Ultimo accesso oggi alle {{contacts[currentIndex].messages[lastAccess(currentIndex)].date}}</div>
                 </div>
               </div>
               <div class="icons">
@@ -103,21 +107,34 @@
               </div>
             </div>
             <div class="chat-bg me-3">
-              <div v-for="message in contacts[currentIndex].messages" class="chat-mex">
+              <div v-for="(message, i) in contacts[currentIndex].messages" class="chat-mex">
                 <div>
-                  <div class="mx-5 my-3 p-3" :class="message.status === 'sent' ? 'sent' : 'received'">
-                    <div>{{message.text}}</div>
+                  <div class="chat-message mx-5 my-3 p-3" :class="message.status">
+                    <div class="d-flex justify-content-between">
+                      <div>{{message.text}}</div>
+                      <i class="ps-4 icons fas fa-chevron-down" @click="openModal()"></i>
+                    </div>
                     <div class="date">{{message.date}}</div>
+                    <div class="mod" v-if="modale === i">
+                      <div class="select-box py-2 px-4">Message info</div>
+                      <div class="select-box py-2 px-4">Delete message</div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="chat-input d-flex justify-content-center align-items-center">
               <i class="chat-icon far fa-smile"></i>
-              <input class="mx-4 message input rounded" placeholder="Scrivi un messaggio" v-model="temporaryItem" @keyup.enter="sendMessage(currentIndex)" type="text"/>
+              <input
+              class="mx-4 message input rounded"
+              placeholder="Scrivi un messaggio"
+              v-model="temporaryMex"
+              @keyup.enter="sendMessage(currentIndex)"
+              type="text"
+              />
               <i class="chat-icon fas fa-microphone"></i>
             </div>
-          </div>
+          </main>
         </div>
       </div>
     </div>

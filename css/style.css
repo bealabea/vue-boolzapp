@@ -4,7 +4,6 @@
 
 .background {
   height: 100vh;
-  background: rgb(2,0,36);
   background: linear-gradient(180deg, rgb(21, 124, 119) 15%, rgb(200, 200, 200) 15%);
 }
 
@@ -51,23 +50,13 @@
   border-radius: 50%;
 }
 
+/* sezione attiva/disattiva notifiche */
 .notify-container {
   background-color: #9fd8f8;
   height: 70px;
 }
 
-.icons {
-  color: rgb(180, 180, 180);
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.fas:hover,
-.far:hover {
-  color: #419388;
-}
-
-.icon {
+.notify-icon {
   color: #9fd8f8;
   background-color: #fff;
   width: 45px;
@@ -76,6 +65,29 @@
   text-align: center;
   border-radius: 50%;
   cursor: pointer;
+}
+
+.notify-icon-on::before {
+  content: "\f0f3";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 800;
+}
+
+.notify-icon-off::before {
+  content: "\f1f6";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 800;
+}
+
+.icons {
+  color: rgb(180, 180, 180);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.notify-icon-on:hover,
+.notify-icon-off:hover {
+  color: #419388;
 }
 
 .text-size {
@@ -137,6 +149,10 @@
   background-color: #eae9ea;
 }
 
+.chat-message {
+  position: relative;
+}
+
 .chat-mex::after{
   content: "";
   clear: both;
@@ -167,10 +183,20 @@
   color: rgb(146, 146, 146);
 }
 
-.show {
-  display: block;
+.select-box {
+  cursor: pointer;
+  color: rgb(109, 109, 109);
 }
 
-.hide {
-  display: none;
+.select-box:hover {
+  color: #419388;
+}
+
+.mod {
+  position: absolute;
+  background-color: #fff;
+  border-radius: 5px;
+  top: 30px;
+  right: 10px;
+  z-index: 1000;
 }
