@@ -186,7 +186,6 @@ new Vue({
         searchName: '',
         notifyText: 'Ricevi notifiche di nuovi messaggi',
         modale: 0,
-        state: false,
     },
     methods: {
         changeChat: function(index) {
@@ -228,8 +227,9 @@ new Vue({
         lastAccess: function(index) {  
             return this.contacts[index].messages.length -1;
         },
-        openModal(){
-            this.state === !this.state;
+        openModal(index){
+            this.modale = index;
+            
         }
-        }
+    }
 });

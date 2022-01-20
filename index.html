@@ -112,7 +112,7 @@
                   <div class="chat-message mx-5 my-3 p-3" :class="message.status">
                     <div class="d-flex justify-content-between">
                       <div>{{message.text}}</div>
-                      <i class="ps-4 icons fas fa-chevron-down" @click="openModal()"></i>
+                      <i class="ps-4 icons fas fa-chevron-down" @click="openModal(i)"></i>
                     </div>
                     <div class="date">{{message.date}}</div>
                     <div class="mod" v-if="modale === i">
