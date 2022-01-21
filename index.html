@@ -129,7 +129,7 @@
                 <!-- con v-if visualizzo solo la modale del messaggio cliccato -->
                 <div class="mod-box rounded" v-if="modale === i">
                   <div class="message-option py-2 px-4">Message info</div>
-                  <div class="message-option py-2 px-4">Delete message</div>
+                  <div class="message-option py-2 px-4" @click="deleteMex(currentIndex)">Delete message</div>
                 </div>
               </div>
             </div>

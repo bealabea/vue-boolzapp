@@ -239,6 +239,9 @@ new Vue({
             } else {
                 this.modale = index;
             }
+        },
+        deleteMex(index){
+            this.contacts[index].messages.splice(this.modale, 1)
         }
     },
 });
