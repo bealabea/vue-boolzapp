@@ -51,11 +51,17 @@
           <section class="p-3 notify-container d-flex align-items-center">
             <!-- funzione che al click cambia il testo e operatore ternario che aggiunge le classi in base al testo -->
             <div class="notify-icon rounded-circle me-3"
-            :class="notifyText === 'Ricevi notifiche di nuovi messaggi'? 'notify-icon-off' : 'notify-icon-on'"
+            :class="notify ? 'notify-icon-off' : 'notify-icon-on'"
             @click="notifyOnOff()"></div>
             <div class="d-flex flex-column justify-content-center">
-              <p class="text-size m-0"><strong>{{notifyText}}</strong></p>
-              <a class="link small-text-size" href="#" @click="notifyOnOff()">{{notifyLink}}</a>
+              <div v-if= "notify">
+              <p class="text-size m-0"><strong>Ricevi notifiche di nuovi messaggi</strong></p>
+              <a class="link small-text-size" href="#" @click="notifyOnOff()">Attiva notifiche desktop</a>
+              </div>
+              <div v-if= "!notify">
+                <p class="text-size m-0"><strong>Disattiva notifiche di nuovi messaggi</strong></p>
+                <a class="link small-text-size" href="#" @click="notifyOnOff()">Disattiva notifiche desktop</a>
+                </div>
             </div>
           </section>
           <!-- input per la ricerca dei contatti -->
@@ -98,7 +104,7 @@
               />
               <div class="">
                 <div class="fw-bold">{{contacts[currentIndex].name}}</div>
-                <div class="small-text-size">Ultimo accesso oggi alle {{contacts[currentIndex].messages[lastAccess(currentIndex)].date}}</div>
+                <div class="small-text-size">Ultimo accesso il {{getLastAccess(currentIndex)}}</div>
               </div>
             </div>
             <!-- icone contatto -->

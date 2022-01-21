@@ -185,14 +185,14 @@ new Vue({
         currentIndex: 0,
         temporaryMex: '',
         searchName: '',
-        notifyText: 'Ricevi notifiche di nuovi messaggi',
-        notifyLink: 'Attiva notifiche desktop',
+        notify: true,
         modale: null,
     },
     methods: {
         // con questo metodo, quando clicco su un contatto visualizzo la chat corrispondente (setto currentIndex allo stesso valore dell'indice dei contatti)
         changeChat: function(index) {
             this.currentIndex = index
+            this.modale = null;
         },
         // con questo metodo se la v:modal data all'input della chat è diversa da una stringa vuota pusho la stringa in un oggetto(con data e status)
         // che automaticamente si visualizzerà come messaggio nella chat, poi svuoto la stringa e compare una risposta random
@@ -220,13 +220,7 @@ new Vue({
         },
         // bonus: ho creato questo metodo per settare la ricezione di notifiche e cambiare icona
         notifyOnOff: function(){
-            if (this.notifyText === 'Ricevi notifiche di nuovi messaggi' && this.notifyLink === 'Attiva notifiche desktop'){
-            this.notifyText = 'Disattiva notifiche di nuovi messaggi';
-            this.notifyLink= 'Disattiva notifiche desktop';
-            } else {
-            this.notifyText ='Ricevi notifiche di nuovi messaggi';
-            this.notifyLink = 'Attiva notifiche desktop';
-            }
+            this.notify = !this.notify
         },
         // con questo metodo e la libreria dayJs creo ora e data dinamici, (inserito in sendMessage e answerMessage)
         getDate() {
@@ -234,8 +228,9 @@ new Vue({
         },
         // con questo metodo creo una funzione che individua l'ultimo messaggio della chat
         // (utilizzato per aggiungere dinamicamente il giorno e l'ora dell'ultimo accesso del contatto)
-        lastAccess: function(index) {  
-            return this.contacts[index].messages.length -1;
+        getLastAccess: function(index) {  
+            let lastMex= this.contacts[index].messages.length -1;
+            return this.contacts[index].messages[lastMex].date;
         },
         // con questo metodo setto la modale in false se è uguale all'indice del messaggio, quindi se aperta (= all'indice) si chiude, se è chiusa (=false) si apre
         openModal(index){
@@ -245,7 +240,7 @@ new Vue({
                 this.modale = index;
             }
         }
-    }
+    },
 });
 
         // contactResearch: function(element){
